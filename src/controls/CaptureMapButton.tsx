@@ -1,25 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useMap } from "react-leaflet"
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
-interface CaptureMapButtonProps {
-  mapContainerRef: React.RefObject<HTMLElement | null>;
-  filename: string;
-}
-
-const CaptureMapButton: React.FC<CaptureMapButtonProps> = ({
-  mapContainerRef,
-  filename,
-}) => {
+function CaptureMapButton ({ filename }: { filename: string }) {
   const [isCapturing, setIsCapturing] = useState(false);
+  const map = useMap();
 
   const handleCapture = async () => {
     // In case does not find the container
-    if (isCapturing || !mapContainerRef.current) return;
+    if (isCapturing) return;
     setIsCapturing(true);
 
     try {
-      const mapDiv = mapContainerRef.current;
+      const mapDiv = map.getContainer();
       const canvas = await html2canvas(mapDiv, { useCORS: true });
       const imgData = canvas.toDataURL("image/png");
 

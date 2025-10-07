@@ -1,23 +1,20 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { MapContainer, ZoomControl, ScaleControl } from "react-leaflet";
 import LayerSelect from "@/components/LayerSelect";
 import StatsPanel from "@/components/StatsPanel";
 import MinimapControl from "@/controls/MinimapControl";
 import CaptureMapButton from "@/controls/CaptureMapButton";
 import DynamicMarker from "@/controls/DynamicMarker";
+import PredioHandler from "@/components/PredioHandler";
 import { initialCoords } from "@/config/config";
 import { standardOSMmm } from "@/layers/BaseLayers";
 import "leaflet/dist/leaflet.css";
 
-function MapControl() {
-  const mapRef = useRef<L.Map | null>(null);
-  const mapContainerRef = useRef<HTMLElement | null>(null);
 
-  useEffect(() => {
-    if (mapRef.current) {
-      mapContainerRef.current = mapRef.current.getContainer();
-    }
-  }, [mapRef.current]);
+
+function MapControl() {
+  const terrenoRef = useRef<any>(null);
+  const sectorRuralRef = useRef<any>(null);
 
   return (
     <MapContainer
@@ -25,12 +22,12 @@ function MapControl() {
       zoom={15}
       zoomControl={true}
       id="map"
-      ref={mapRef}
     >
       <ZoomControl position="topright" />
       <ScaleControl imperial={false} position="bottomleft" />
 
-      <LayerSelect />
+      <LayerSelect terrenoRef={terrenoRef} sectorRuralRef={sectorRuralRef} />
+      <PredioHandler terrenoRef={terrenoRef} sectorRuralRef={sectorRuralRef} />
       <StatsPanel />
 
       <MinimapControl
@@ -43,7 +40,6 @@ function MapControl() {
       />
 
       <CaptureMapButton
-        mapContainerRef={mapContainerRef}
         filename="captura_mapa.pdf"
       />
 

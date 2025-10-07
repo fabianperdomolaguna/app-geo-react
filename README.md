@@ -69,10 +69,10 @@ Esto generará los archivos optimizados en la carpeta `dist/`, listos para ser d
 -    `src/` — Código fuente de la aplicación.
      -    `components/` — Componentes reutilizables del mapa.
      -    `controls/` — Controles personalizados (marcadores, minimapa, captura).
-     -    `events/` — Manejadores de eventos (clicks, popups).
      -    `layers/` — Definición de capas base y superpuestas.
      -    `services/` — Datos simulados para estadística.
-     -    `ui/` — Elementos de interfaz de usuario (modales).
+     -    `helpers/` — Función para construir la URL del feature seleccionado.
+     -    `hooks/` — Hook to highlight feature seleccionado.
      -    `config.ts` — Configuración inicial (coordenadas).
      -    `MapControl.tsx` — Componente principal del mapa - Controlador.
      -    `map.scss` — Estilos específicos del mapa.
@@ -91,7 +91,7 @@ Esto generará los archivos optimizados en la carpeta `dist/`, listos para ser d
 -    [React Leaflet](https://react-leaflet.js.org/) (5.0.0) — Biblioteca de componentes de React para mapas de Leaflet.
 -    [Bootstrap](https://getbootstrap.com/) (v5.3.3) — Framework CSS para diseño responsivo.
 -    [Leaflet-MiniMap](https://github.com/Norkart/Leaflet-MiniMap) (v3.6.1) — Plugin para mostrar un mini-mapa.
--    [Leaflet-Marker-Rotation](https://github.com/bbecquet/Leaflet.RotatedMarker) (v0.3.0) — Plugin para rotación de marcadores.
+-    [Leaflet-RotatedMarker](https://github.com/bbecquet/Leaflet.RotatedMarker) (v0.2.0) — Plugin para rotación de marcadores.
 -    [Leaflet.Awesome-Markers](https://github.com/lvoogdt/Leaflet.awesome-markers) (v2.0.5) — Marcadores personalizados con iconos.
 -    [Leaflet-Image](https://github.com/mapbox/leaflet-image) (v0.4.0) — Para capturar imágenes del mapa.
 -    [html2canvas](https://html2canvas.hertzen.com/) (v1.4.1) — Para capturar el mapa como imagen.
@@ -126,7 +126,7 @@ Para desplegar la aplicación en un entorno de producción:
 
 La aplicación está configurada para mostrar inicialmente un mapa centrado en las coordenadas definidas en `src/config/config.ts`. Puedes modificar estas coordenadas para ajustar la vista inicial del mapa según tus necesidades.
 
-```javascript
+```typescript
 // Coordenadas iniciales (latitud, longitud)
 export const initialCoords: [number, number] = [10.494762, -75.123706]
 ```
