@@ -1,32 +1,43 @@
 import { useState } from "react";
-import { useMap } from "react-leaflet"
-import html2canvas from "html2canvas";
+import { useMap } from "react-leaflet";
+import domtoimage from "dom-to-image-more";
 import jsPDF from "jspdf";
 
-function CaptureMapButton ({ filename }: { filename: string }) {
+function CaptureMapButton({ filename }: { filename: string }) {
   const [isCapturing, setIsCapturing] = useState(false);
   const map = useMap();
 
   const handleCapture = async () => {
-    // In case does not find the container
     if (isCapturing) return;
     setIsCapturing(true);
 
     try {
       const mapDiv = map.getContainer();
-      const canvas = await html2canvas(mapDiv, { useCORS: true });
-      const imgData = canvas.toDataURL("image/png");
+
+      const dataUrl = await domtoimage.toPng(mapDiv, {
+        quality: 4,
+        cacheBust: true,
+        bgcolor: "#ffffff",
+      });
+
+      const img = new Image();
+      img.src = dataUrl;
+
+      await new Promise<void>((resolve, reject) => {
+        img.onload = () => resolve();
+        img.onerror = reject;
+      });
 
       const pdf = new jsPDF({
         orientation: "landscape",
         unit: "px",
-        format: [canvas.width, canvas.height],
+        format: [img.width, img.height],
       });
 
-      pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
-      pdf.save(filename);
+      pdf.addImage(img, "PNG", 0, 0, img.width, img.height);
+      pdf.save(filename.endsWith(".pdf") ? filename : `${filename}.pdf`);
     } catch (err) {
-      console.error("Error al capturar el mapa", err);
+      console.error("Error al capturar el mapa:", err);
     } finally {
       setIsCapturing(false);
     }
@@ -37,6 +48,6 @@ function CaptureMapButton ({ filename }: { filename: string }) {
       {isCapturing ? "Capturando…" : "Capturar"}
     </button>
   );
-};
+}
 
 export default CaptureMapButton;
