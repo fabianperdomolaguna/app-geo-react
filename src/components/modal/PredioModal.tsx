@@ -40,7 +40,7 @@ function PredioModal({ visible, onClose, info }: PredioProps) {
         </div>
       </div>
     </div>,
-    document.getElementById("map")!
+    document.body
   );
 }
 
