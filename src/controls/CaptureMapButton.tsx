@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useMap } from "react-leaflet";
 import domtoimage from "dom-to-image-more";
 import jsPDF from "jspdf";
@@ -7,14 +7,14 @@ function CaptureMapButton({ filename }: { filename: string }) {
   const [isCapturing, setIsCapturing] = useState(false);
   const map = useMap();
 
-  const handleCapture = async () => {
-    if (isCapturing) return;
+  const captureMapAsPDF = useCallback(async () => {
+    if (!map || isCapturing) return;
     setIsCapturing(true);
 
     try {
-      const mapDiv = map.getContainer();
+      const mapContainer = map.getContainer();
 
-      const dataUrl = await domtoimage.toPng(mapDiv, {
+      const dataUrl = await domtoimage.toPng(mapContainer, {
         quality: 4,
         cacheBust: true,
         bgcolor: "#ffffff",
@@ -41,10 +41,14 @@ function CaptureMapButton({ filename }: { filename: string }) {
     } finally {
       setIsCapturing(false);
     }
-  };
+  }, [map, filename, isCapturing]);
 
   return (
-    <button onClick={handleCapture} disabled={isCapturing} id="capture-map-btn">
+    <button
+      onClick={captureMapAsPDF}
+      disabled={isCapturing}
+      id="capture-map-btn"
+    >
       {isCapturing ? "Capturando…" : "Capturar"}
     </button>
   );
