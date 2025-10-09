@@ -73,11 +73,11 @@ Esto generará los archivos optimizados en la carpeta `dist/`, listos para ser d
   - `services/` — Datos simulados para estadística.
   - `helpers/` — Función para construir la URL del feature seleccionado.
   - `hooks/` — Hook to highlight feature seleccionado.
+  - `types/` — Archivos de declaración de tipos para extender interfaces de leaflet y describir las formas de dom-to-image-more escrito en javascript.
   - `config.ts` — Configuración inicial (coordenadas).
   - `MapControl.tsx` — Componente principal del mapa - Controlador.
   - `map.scss` — Estilos específicos del mapa.
   - `assets/` — Imágenes y recursos estáticos.
-  - `img/` — Imágenes utilizadas en la aplicación (favicon, marcadores).
   - `scss/` — Estilos en SASS.
   - `colors.scss` — Variables de colores.
   - `sizes.scss` — Variables de tamaños.
@@ -93,7 +93,6 @@ Esto generará los archivos optimizados en la carpeta `dist/`, listos para ser d
 - [Leaflet-MiniMap](https://github.com/Norkart/Leaflet-MiniMap) (v3.6.1) — Plugin para mostrar un mini-mapa.
 - [Leaflet-RotatedMarker](https://github.com/bbecquet/Leaflet.RotatedMarker) (v0.2.0) — Plugin para rotación de marcadores.
 - [Leaflet.Awesome-Markers](https://github.com/lvoogdt/Leaflet.awesome-markers) (v2.0.5) — Marcadores personalizados con iconos.
-- [Leaflet-Image](https://github.com/mapbox/leaflet-image) (v0.4.0) — Para capturar imágenes del mapa.
 - [dom-to-image-more](https://github.com/1904labs/dom-to-image-more) (v3.7.1) — Para capturar el mapa como imagen.
 - [jsPDF](https://github.com/parallax/jsPDF) (v3.0.3) — Para exportar el mapa a PDF.
 - [Font Awesome](https://fontawesome.com/) (v7.1.0) — Iconos vectoriales.

@@ -1,19 +1,18 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
-import { useMap } from 'react-leaflet'
-import L from 'leaflet';
-import 'leaflet-rotatedmarker';
+import { useMap } from "react-leaflet";
+import L from "leaflet";
+import "leaflet-rotatedmarker";
 //import markerIcon from 'leaflet/dist/images/marker-icon.png';
-import markerShadow from 'leaflet/dist/images/marker-shadow.png';
-
-const redMarkerIconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import marcador from "@/assets/images/marcador-48.png";
 
 const defaultIcon = L.icon({
-  iconUrl: redMarkerIconUrl,
+  iconUrl: marcador,
   shadowUrl: markerShadow,
-  iconSize: [25, 41],
-  iconAnchor: [12.5, 41],
-  popupAnchor: [0, -35],
+  iconSize: [30, 30],
+  iconAnchor: [15, 30],
+  popupAnchor: [0, -30],
 });
 
 interface DynamicMarkerProps {
@@ -22,14 +21,18 @@ interface DynamicMarkerProps {
   popupContent?: string | React.ReactNode;
 }
 
-function DynamicMarker({ position, angle = 0, popupContent }: DynamicMarkerProps) {
+function DynamicMarker({
+  position,
+  angle = 0,
+  popupContent,
+}: DynamicMarkerProps) {
   const map = useMap();
 
   useEffect(() => {
     const marker = L.marker(position, {
       icon: defaultIcon,
       rotationAngle: angle,
-      rotationOrigin: 'center',
+      rotationOrigin: "center",
     }).addTo(map);
 
     if (popupContent) {
@@ -51,4 +54,4 @@ function DynamicMarker({ position, angle = 0, popupContent }: DynamicMarkerProps
   return null;
 }
 
-export default DynamicMarker
+export default DynamicMarker;
