@@ -40,7 +40,13 @@ GEO APP es una aplicación desarrollada con Typescript, React y Vite que permite
    cd APP
    ```
 
-2. Instala las dependencias:
+2. Crear un .env file en la raiz del proyecto con el API Key para los Basemaps de Carto. Puedes obtener una API en [CARTO Basemap API Key](https://www.carto.com/basemaps/apikey/).
+
+   ```env
+   VITE_CARTO_API_KEY=your_API_key
+   ```
+
+3. Instala las dependencias:
 
    ```bash
    npm install

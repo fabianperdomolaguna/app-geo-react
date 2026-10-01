@@ -10,8 +10,6 @@ import { initialCoords } from "@/config/config";
 import { standardOSMmm } from "@/layers/BaseLayers";
 import "leaflet/dist/leaflet.css";
 
-
-
 function MapControl() {
   const terrenoRef = useRef<any>(null);
   const sectorRuralRef = useRef<any>(null);

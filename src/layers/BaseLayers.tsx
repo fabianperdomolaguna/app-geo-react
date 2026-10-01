@@ -17,7 +17,7 @@ export type ConfigBaseLayer = {
 
 const CartoLight: React.ReactElement = (
   <TileLayer
-    url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+    url={`https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=${import.meta.env.VITE_CARTO_API_KEY}`}
     attribution="&copy;OpenStreetMap, &copy;CartoDB"
     subdomains="abcd"
     maxZoom={24}
@@ -82,7 +82,7 @@ const ESRIStreet: React.ReactElement = (
 
 const CartoDark: React.ReactElement = (
   <TileLayer
-    url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+    url={`https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=${import.meta.env.VITE_CARTO_API_KEY}`}
     attribution="Tile &copy; ESRI"
     maxZoom={19}
     crossOrigin={true}
